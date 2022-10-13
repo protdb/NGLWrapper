@@ -1,0 +1,37 @@
+{
+  "scene_type": "compare",
+  "structures": [
+    {
+      "name": "reference",
+      "url": "examples/relaxation/reference.pdb",
+      "repr": "cartoon",
+      "repr_params": {
+        "color": "#888"
+      }
+    },
+    {
+      "name": "reference_relaxed",
+      "url": "examples/relaxation/reference_relaxed.pdb",
+      "repr": "cartoon",
+      "repr_params": {
+        "color": "#AAA"
+      }
+    },
+    {
+      "name": "modified",
+      "url": "examples/relaxation/modified.pdb",
+      "repr": "cartoon",
+      "repr_params": {
+        "color": "green"
+      }
+    },
+    {
+      "name": "modified_relaxed",
+      "url": "examples/relaxation/modified_relaxed.pdb",
+      "repr": "cartoon",
+      "repr_params": {
+        "color": "#00FF00"
+      }
+    }
+  ]
+}

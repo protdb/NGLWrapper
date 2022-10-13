@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Examples for NGL</title>
+    <script src="ngl.js"></script>
+    <script src="ngl_wrapper.js"></script>
+    <script>
+        const controls_translations = {
+            "ngl_focus_all_button": "Фокус на белок",
+            "ngl_focus_chain_button": "Фокус на цепь",
+            "ngl_focus_fragment_button": "Фокус на фрагмент",
+            "ngl_show_all_button": "Показать весь белок",
+            "ngl_show_chain_button": "Показать всю цепь",
+            "ngl_show_fragment_button": "Показать только фрагмент"
+        }
+    </script>
+</head>
+<body>
+<h1>Примеры работы NGL Wrapper</h1>
+<p>Примеры в рамках сценариев использования на сайте psskb.org для встаривания плеера на сайт</p>
+<h2>Пример №1: карточка структуры</h2>
+<div id="ngl_wrapper_structure">
+    <div class="ngl_stage" style="width: 600px; height: 600px"></div>
+    <div class="ngl_controls"></div>
+    <div class="ngl_loader">Это типа лоадер крутится</div>
+</div>
+<h2>Пример №2: карточка цепи белка</h2>
+<div id="ngl_wrapper_protein">
+    <div class="ngl_stage" style="width: 600px; height: 600px"></div>
+    <div class="ngl_controls"></div>
+    <div class="ngl_loader">Это типа лоадер крутится</div>
+</div>
+<h2>Пример №3: сравнение результатов релаксации</h2>
+<div id="ngl_wrapper_modification">
+    <div class="ngl_stage" style="width: 600px; height: 600px"></div>
+    <div class="ngl_controls"></div>
+    <div class="ngl_loader">Это типа лоадер крутится</div>
+</div>
+<h2>Пример №4: траектория молекулярной динамики</h2>
+<div id="ngl_wrapper_md">
+    <div class="ngl_stage" style="width: 600px; height: 600px"></div>
+    <div class="ngl_controls"></div>
+    <div class="ngl_loader">Это типа лоадер крутится</div>
+</div>
+<script>
+    let structure_wrapper = undefined;
+    fetch("params_structure.json").then( async function (res) {
+        let params = await res.json()
+        structure_wrapper = await initiateWrapper(
+            document.getElementById("ngl_wrapper_structure"),
+            params,
+            controls_translations
+        )
+    })
+    let protein_wrapper = undefined;
+    fetch("params_protein.json").then( async function(res) {
+        let params = await res.json()
+        protein_wrapper = await initiateWrapper(
+            document.getElementById("ngl_wrapper_protein"),
+            params,
+            controls_translations
+        )
+    })
+    let modification_wrapper = undefined;
+    fetch("params_relax.json").then( async function(res) {
+        let params = await res.json()
+        modification_wrapper = await initiateWrapper(
+            document.getElementById("ngl_wrapper_modification"),
+            params,
+            controls_translations
+        )
+    })
+    let md_wrapper = undefined;
+    fetch("params_md.json").then( async function(res) {
+        let params = await res.json()
+        md_wrapper = await initiateWrapper(
+            document.getElementById("ngl_wrapper_md"),
+            params,
+            controls_translations
+        )
+    })
+</script>
+</body>
+</html>

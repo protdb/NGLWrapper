@@ -1,0 +1,17 @@
+{
+  "scene_type": "substructure",
+  "structures": [
+    {
+      "name": "protein",
+      "url": "examples/3lue.pdb",
+      "selection":
+        {
+          "type": "motif",
+          "name": "structure",
+          "chain": "A",
+          "start": 236,
+          "end": 253
+        }
+    }
+  ]
+}
