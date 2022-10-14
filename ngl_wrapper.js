@@ -36,7 +36,7 @@ async function createNGLWrapper(container, params) {
                 "onclick": getToggleButton(wrapper.components[cmp_name])
             })
         }
-    } else if (["substructure", "protein"].includes(params["scene_type"])) {
+    } else if (["fragment"].includes(params["scene_type"])) {
         wrapper.protein = wrapper.components['protein'];
         const selection = params.structures[0].selection;
         wrapper.setDefaultView = null

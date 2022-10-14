@@ -1,5 +1,5 @@
 {
-  "scene_type": "substructure",
+  "scene_type": "fragment",
   "structures": [
     {
       "name": "protein",
