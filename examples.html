@@ -31,6 +31,14 @@
     <div class="ngl_controls"></div>
     <div class="ngl_loader">Это типа лоадер крутится</div>
 </div>
+<p>Картирование</p>
+<div>
+    <label for="chain">Цепь:</label><input type="text" id="chain" value="A">
+    <label for="start">Начало:</label><input type="text" id="start" value="23">
+    <label for="end">Конец:</label><input type="text" id="end" value="42">
+    <button id="select_button">Выделить</button>
+    <button id="unselect_button">Снять выделение</button>
+</div>
 <h2>Пример №3: сравнение результатов релаксации</h2>
 <div id="ngl_wrapper_modification">
     <div class="ngl_stage" style="width: 600px; height: 600px"></div>
@@ -61,6 +69,18 @@
             params,
             controls_translations
         )
+    })
+    // Пример картирования
+    let selection;
+    document.getElementById('select_button').addEventListener('click', function () {
+        protein_wrapper.drawCustomSelection(
+            document.getElementById("chain").value,
+            document.getElementById("start").value,
+            document.getElementById("end").value
+        )
+    })
+    document.getElementById('unselect_button').addEventListener('click', function () {
+        protein_wrapper.cleanCustomSelection()
     })
     let modification_wrapper = undefined;
     fetch("params_relax.json").then( async function(res) {

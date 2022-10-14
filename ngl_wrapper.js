@@ -114,6 +114,33 @@ async function createNGLWrapper(container, params) {
         ]
     }
     wrapper.setDefaultView()
+    wrapper.drawCustomSelection = function (chain, start, end, repr_params, component) {
+        if (!component) {
+            if (!this.protein) {
+                component = this.components[0]
+            } else {
+                component = this.protein
+            }
+        }
+        if (!repr_params) {
+            repr_params = {"color": "green"}
+        }
+        const sele_string = `${start}-${end}:${chain}`
+        console.log(sele_string)
+        if (!this.custom_selection) {
+            this.custom_selection = component.addRepresentation("cartoon", repr_params)
+        }
+        this.custom_selection.setVisibility(true)
+        //todo: add option to reset repr_params and change display type for selection
+        this.custom_selection = this.custom_selection.setSelection(sele_string)
+        this.chain_repr.setParameters({color: '#AAA', fogNear: 100, fogFar: 100})
+        component.autoView(sele_string, anim_duration)
+    }
+    wrapper.cleanCustomSelection = function () {
+        this.custom_selection.setVisibility(false)
+        this.chain_repr.setParameters({color: 'green', fogNear: 100, fogFar: 100})
+        this.setDefaultView()
+    }
     return wrapper
 }
 function getToggleButton(component) {
