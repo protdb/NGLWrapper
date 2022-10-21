@@ -15,21 +15,34 @@
             "ngl_show_fragment_button": "Показать только фрагмент"
         }
     </script>
+    <style>
+        .ngl_loader {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            top: -600px;
+            left: 0;
+            opacity: 0.5;
+            background-image: url("loader.gif");
+            background-size: 50px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: rgba(255, 255, 255, 0.5);
+            transform: translateZ(10px)
+        }
+    </style>
 </head>
 <body>
 <h1>Примеры работы NGL Wrapper</h1>
 <p>Примеры в рамках сценариев использования на сайте psskb.org для встаривания плеера на сайт</p>
 <h2>Пример №1: карточка структуры</h2>
 <div id="ngl_wrapper_structure">
-    <div class="ngl_stage" style="width: 600px; height: 600px"></div>
-    <div class="ngl_controls"></div>
-    <div class="ngl_loader">Это типа лоадер крутится</div>
 </div>
 <h2>Пример №2: карточка цепи белка</h2>
 <div id="ngl_wrapper_protein">
     <div class="ngl_stage" style="width: 600px; height: 600px"></div>
     <div class="ngl_controls"></div>
-    <div class="ngl_loader">Это типа лоадер крутится</div>
+    <div class="ngl_loader"></div>
 </div>
 <p>Картирование</p>
 <div>
@@ -43,20 +56,22 @@
 <div id="ngl_wrapper_modification">
     <div class="ngl_stage" style="width: 600px; height: 600px"></div>
     <div class="ngl_controls"></div>
-    <div class="ngl_loader">Это типа лоадер крутится</div>
+    <div class="ngl_loader"></div>
 </div>
 <h2>Пример №4: траектория молекулярной динамики</h2>
 <div id="ngl_wrapper_md">
     <div class="ngl_stage" style="width: 600px; height: 600px"></div>
     <div class="ngl_controls"></div>
-    <div class="ngl_loader">Это типа лоадер крутится</div>
+    <div class="ngl_loader"></div>
 </div>
 <script>
     let structure_wrapper = undefined;
     fetch("params_structure.json").then( async function (res) {
         let params = await res.json()
-        structure_wrapper = await initiateWrapper(
+        structure_wrapper = await createWrapper(
             document.getElementById("ngl_wrapper_structure"),
+            600,
+            600,
             params,
             controls_translations
         )

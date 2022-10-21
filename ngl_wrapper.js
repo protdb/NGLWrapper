@@ -1,6 +1,6 @@
 const anim_duration = 500
 
-async function createNGLWrapper(container, params) {
+async function MakeWrapper(container, params) {
     let wrapper = {}
     wrapper.stage = new NGL.Stage(container);
     wrapper.stage.setParameters( {
@@ -29,7 +29,7 @@ async function createNGLWrapper(container, params) {
     wrapper.setDefaultView = function () {
         wrapper.stage.autoView()
     }
-    if (params["scene_type"] === "compare") {
+    if (params["scene_type"] === "comparsion") {
         for (let cmp_name in wrapper.components) {
             wrapper.buttons.push({
                 "id": "ngl_toggle_"+cmp_name,
@@ -192,14 +192,31 @@ async function initiateWrapper (root_elem, parameters, controls_translations) {
     let stage = root_elem.getElementsByClassName("ngl_stage")[0]
     let controls = root_elem.getElementsByClassName("ngl_controls")[0]
     let loader = root_elem.getElementsByClassName("ngl_loader")[0]
-    let wrapper = await createNGLWrapper(stage, parameters)
+    let wrapper = await MakeWrapper(stage, parameters)
     for (let butt of wrapper.buttons) {
+        const button_name = (butt['id'] in controls_translations) ? controls_translations[butt['id']]: butt['id']
         let button = document.createElement('button')
-        button.setAttribute('className', butt['id'])
+        button.setAttribute('class', `ngl_button ${butt['id']}`)
         button.addEventListener('click', butt['onclick'])
-        button.innerText = ((butt['id'] in controls_translations) ? controls_translations[butt['id']]: butt['id'])
+        button.innerText = (button_name)
+        button.setAttribute('title', button_name)
         controls.appendChild(button)
     }
     loader.style.display = 'none';
     return wrapper
+}
+
+async function createWrapper(root_elem, stage_width, stage_height, parameters, controls_translations) {
+    let stage = document.createElement('div')
+    stage.setAttribute('class', 'ngl_stage')
+    stage.style.width = `${stage_width}px`
+    stage.style.height = `${stage_height}px`
+    root_elem.appendChild(stage)
+    let controls = document.createElement('div')
+    controls.setAttribute('class', 'ngl_controls')
+    root_elem.appendChild(controls)
+    let loader = document.createElement('div')
+    loader.setAttribute('class', 'ngl_loader')
+    root_elem.appendChild(loader)
+    return await initiateWrapper(root_elem, parameters, controls_translations)
 }

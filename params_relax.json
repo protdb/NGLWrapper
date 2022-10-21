@@ -7,6 +7,10 @@
       "repr": "cartoon",
       "repr_params": {
         "color": "#888"
+      },
+      "selection": {
+        "type": "residue",
+        "number": "43"
       }
     },
     {
