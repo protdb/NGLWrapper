@@ -3,7 +3,7 @@
   "structures": [
     {
       "name": "reference",
-      "url": "examples/relaxation/reference.pdb",
+      "url": "examples/relaxation/reference.pdb?rand=181022",
       "representations": [
         {
           "type": "cartoon",
@@ -17,7 +17,7 @@
     },
     {
       "name": "reference_relaxed",
-      "url": "examples/relaxation/reference_relaxed.pdb",
+      "url": "examples/relaxation/reference_relaxed.pdb?rand=181022",
       "representations": [
         {
           "type": "cartoon",
@@ -31,7 +31,7 @@
     },
     {
       "name": "modified",
-      "url": "examples/relaxation/modified.pdb",
+      "url": "examples/relaxation/modified.pdb?rand=181022",
       "representations": [
         {
           "type": "cartoon",
@@ -45,7 +45,7 @@
     },
     {
       "name": "modified_relaxed",
-      "url": "examples/relaxation/modified_relaxed.pdb",
+      "url": "examples/relaxation/modified_relaxed.pdb?rand=181022",
       "representations": [
         {
           "type": "cartoon",

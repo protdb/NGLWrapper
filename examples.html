@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Examples for NGL</title>
     <script src="ngl.js"></script>
-    <script src="ngl_wrapper.js"></script>
+    <script src="ngl_wrapper.js?rand=281022"></script>
     <script>
         const controls_translations = {
             "ngl_focus_all_button": "Фокус на белок",
@@ -65,8 +65,9 @@
     <div class="ngl_loader"></div>
 </div>
 <script>
+    let rand_key = Math.random()
     let structure_wrapper = undefined;
-    fetch("params_structure.json").then( async function (res) {
+    fetch(`params_structure.json?rand=${rand_key}`).then( async function (res) {
         let params = await res.json()
         structure_wrapper = await createWrapper(
             document.getElementById("ngl_wrapper_structure"),
@@ -77,7 +78,7 @@
         )
     })
     let protein_wrapper = undefined;
-    fetch("params_protein.json").then( async function(res) {
+    fetch(`params_protein.json?rand=${rand_key}`).then( async function(res) {
         let params = await res.json()
         protein_wrapper = await initiateWrapper(
             document.getElementById("ngl_wrapper_protein"),
@@ -97,7 +98,7 @@
         protein_wrapper.cleanCustomSelection()
     })
     let modification_wrapper = undefined;
-    fetch("params_compare.json").then( async function(res) {
+    fetch(`params_compare.json?rand=${rand_key}`).then( async function(res) {
         let params = await res.json()
         modification_wrapper = await initiateWrapper(
             document.getElementById("ngl_wrapper_modification"),
@@ -106,7 +107,7 @@
         )
     })
     let md_wrapper = undefined;
-    fetch("params_md.json").then( async function(res) {
+    fetch(`params_md.json?rand=${rand_key}`).then( async function(res) {
         let params = await res.json()
         md_wrapper = await initiateWrapper(
             document.getElementById("ngl_wrapper_md"),
