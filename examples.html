@@ -97,7 +97,7 @@
         protein_wrapper.cleanCustomSelection()
     })
     let modification_wrapper = undefined;
-    fetch("params_relax.json").then( async function(res) {
+    fetch("params_compare.json").then( async function(res) {
         let params = await res.json()
         modification_wrapper = await initiateWrapper(
             document.getElementById("ngl_wrapper_modification"),
