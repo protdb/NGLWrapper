@@ -4,38 +4,136 @@
     {
       "name": "reference",
       "url": "examples/relaxation/reference.pdb",
-      "repr": "cartoon",
-      "repr_params": {
-        "color": "#888"
-      },
-      "selection": {
-        "type": "residue",
-        "number": "43"
-      }
+      "representations": [
+        {
+          "type": "cartoon",
+          "name": "reference",
+          "color_scheme": [
+            ["red", "43"],
+            ["#888", "*"]
+          ]
+        }
+      ]
     },
     {
       "name": "reference_relaxed",
       "url": "examples/relaxation/reference_relaxed.pdb",
-      "repr": "cartoon",
-      "repr_params": {
-        "color": "#AAA"
-      }
+      "representations": [
+        {
+          "type": "cartoon",
+          "name": "reference_relaxed",
+          "color_scheme": [
+            ["red", "43"],
+            ["#AAA", "*"]
+          ]
+        }
+      ]
     },
     {
       "name": "modified",
       "url": "examples/relaxation/modified.pdb",
-      "repr": "cartoon",
-      "repr_params": {
-        "color": "green"
-      }
+      "representations": [
+        {
+          "type": "cartoon",
+          "name": "modified",
+          "color_scheme": [
+            ["red", "43"],
+            ["#00FF00", "*"]
+          ]
+        }
+      ]
     },
     {
       "name": "modified_relaxed",
       "url": "examples/relaxation/modified_relaxed.pdb",
-      "repr": "cartoon",
-      "repr_params": {
-        "color": "#00FF00"
-      }
+      "representations": [
+        {
+          "type": "cartoon",
+          "name": "modified_relaxed",
+          "color_scheme": [
+            ["red", "43"],
+            ["green", "*"]
+          ]
+        },
+        {
+          "type": "complex",
+          "name": "surface_changes",
+          "sub_reprs": [
+            {
+              "type": "surface",
+              "params": {
+                "sele": "41",
+                "opacity": "0.2",
+                "wireframe": false,
+                "color": "#CB4335"
+              }
+            },
+            {
+              "type": "surface",
+              "params": {
+                "sele": "42",
+                "opacity": "0.2",
+                "wireframe": false,
+                "color": "#CB4335"
+              }
+            },
+            {
+              "type": "surface",
+              "params": {
+                "sele": "43",
+                "opacity": "0.2",
+                "wireframe": false,
+                "color": "#CB4335"
+              }
+            },
+            {
+              "type": "surface",
+              "params": {
+                "sele": "45",
+                "opacity": "0.2",
+                "wireframe": false,
+                "color": "#CB4335"
+              }
+            },
+            {
+              "type": "surface",
+              "params": {
+                "sele": "54",
+                "opacity": "0.2",
+                "wireframe": false,
+                "color": "#CB4335"
+              }
+            },
+            {
+              "type": "surface",
+              "params": {
+                "sele": "55",
+                "opacity": "0.2",
+                "wireframe": false,
+                "color": "#CB4335"
+              }
+            },
+            {
+              "type": "surface",
+              "params": {
+                "sele": "95",
+                "opacity": "0.2",
+                "wireframe": false,
+                "color": "#2874A6"
+              }
+            },
+            {
+              "type": "surface",
+              "params": {
+                "sele": "'0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,44,46,47,48,49,50,51,52,53,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,96,97,98'",
+                "opacity": "0.2",
+                "wireframe": false,
+                "color": "#A9DFBF"
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

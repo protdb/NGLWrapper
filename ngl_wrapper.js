@@ -10,15 +10,37 @@ async function MakeWrapper(container, params) {
     } );
     wrapper.buttons = []
     wrapper.components = {}
+    wrapper.reprs = []
     async function makeComponent(struct) {
-        cmp = await wrapper.stage.loadFile(struct.url)
+        let cmp = await wrapper.stage.loadFile(struct.url)
         cmp.setName(struct['name'])
-        if ('repr' in struct) {
-            let repr_params = {}
-            if ('repr_params' in struct) {
-                repr_params = struct['repr_params']
+        if ('representations' in struct) {
+            for (let repr of struct.representations) {
+                if (repr.type !== "complex") {
+                    let repr_params = {}
+                    if ('params' in repr) {
+                        repr_params = repr['params']
+                    }
+                    if ('color_scheme' in repr) {
+                        repr_params.color = NGL.ColormakerRegistry.addSelectionScheme(repr.color_scheme, 'scheme')
+                    }
+                    wrapper.reprs.push({
+                        "name": repr.name,
+                        "reprs": [
+                            cmp.addRepresentation(repr.type, repr_params)
+                        ]
+                    })
+                } else {
+                    let reprs = []
+                    for (let subrepr of repr["sub_reprs"]) {
+                        reprs.push(cmp.addRepresentation(subrepr.type, subrepr.params))
+                    }
+                    wrapper.reprs.push({
+                        "name": repr.name,
+                        "reprs": reprs
+                    })
+                }
             }
-            cmp.addRepresentation(struct['repr'], repr_params)
         }
         wrapper.components[struct['name']] = cmp
 
@@ -30,10 +52,10 @@ async function MakeWrapper(container, params) {
         wrapper.stage.autoView()
     }
     if (params["scene_type"] === "comparsion") {
-        for (let cmp_name in wrapper.components) {
+        for (let repr of wrapper.reprs) {
             wrapper.buttons.push({
-                "id": "ngl_toggle_"+cmp_name,
-                "onclick": getToggleButton(wrapper.components[cmp_name])
+                "id": "ngl_toggle_"+repr.name,
+                "onclick": getToggleButton(repr.reprs)
             })
         }
     } else if (["fragment"].includes(params["scene_type"])) {
@@ -143,9 +165,11 @@ async function MakeWrapper(container, params) {
     }
     return wrapper
 }
-function getToggleButton(component) {
+function getToggleButton(representations) {
     return function () {
-        component.setVisibility(!component.visible)
+        for (let repr of representations) {
+            repr.toggleVisibility()
+        }
     }
 }
 

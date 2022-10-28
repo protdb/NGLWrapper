@@ -4,10 +4,15 @@
     {
       "name": "protein",
       "url": "examples/md.gro",
-      "repr": "cartoon",
-      "repr_params": {
-        "colorScheme": "sstruc"
-      },
+      "representations": [
+        {
+          "name": "md_struct",
+          "type": "cartoon",
+          "params": {
+            "colorScheme": "sstruc"
+          }
+        }
+      ],
       "trajectory": {
         "url": "examples/md_conv.xtc"
       }
