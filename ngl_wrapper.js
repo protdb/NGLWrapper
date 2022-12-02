@@ -71,7 +71,10 @@ async function MakeWrapper(container, params) {
             wrapper.chain_sele = `:${selection.chain} and not (${selection.start + 1}-${selection.end - 1})`;
             wrapper.chain_repr.setParameters({color: '#AAA'})
             wrapper.whole_sele = `not :${selection.chain}`
-            wrapper.setDefaultView = getShowPartiallyButton([wrapper.fragment_repr], [wrapper.chain_repr, wrapper.whole_repr], wrapper.protein, wrapper.fragment_sele)
+            wrapper.setDefaultView = getShowPartiallyButton(
+                [wrapper.fragment_repr],
+                [wrapper.chain_repr, wrapper.whole_repr],
+                wrapper.protein, wrapper.fragment_sele)
         } else {
             wrapper.chain_sele = `:${selection.chain}`
             wrapper.chain_repr.setParameters({color: 'green'})
@@ -82,30 +85,19 @@ async function MakeWrapper(container, params) {
         wrapper.whole_repr.setSelection(wrapper.whole_sele)
 
         console.log(wrapper.fragment_sele)
-        wrapper.buttons = [
-            {
-                "id": "ngl_focus_all_button",
-                "onclick": getFocusOnAllButton(wrapper)
-            },
-            {
-                "id": "ngl_focus_chain_button",
-                "onclick": focusOnSelection(wrapper, wrapper.chain_sele)
-            },
-
-            {
+        if (!params["single_chain"]) {
+            wrapper.buttons.push({
                 "id": "ngl_show_all_button",
                 "onclick": getShowAllButton([wrapper.chain_repr, wrapper.whole_repr, wrapper.fragment_repr], wrapper.protein)
-            },
+            })
+        }
+        wrapper.buttons.push(
             {
                 "id": "ngl_show_chain_button",
                 "onclick": getShowPartiallyButton([wrapper.chain_repr, wrapper.fragment_repr], [wrapper.whole_repr], wrapper.protein, wrapper.chain_sele)
             }
-        ]
+        )
         if (selection.type === "motif") {
-            wrapper.buttons.splice(2, 0, {
-                "id": "ngl_focus_fragment_button",
-                "onclick": focusOnSelection(wrapper, wrapper.fragment_sele)
-            })
             wrapper.buttons.splice(5, 0, {
                 "id": "ngl_show_fragment_button",
                 "onclick": getShowPartiallyButton([wrapper.fragment_repr], [wrapper.chain_repr, wrapper.whole_repr], wrapper.protein, wrapper.fragment_sele)
@@ -134,6 +126,9 @@ async function MakeWrapper(container, params) {
                 }
             }
         ]
+    } else if (params["scene_type"] === "simple") {
+        wrapper.protein = wrapper.components['protein'];
+        wrapper.protein.addRepresentation("cartoon", {colorScheme: 'sstruc'})
     }
     wrapper.setDefaultView()
     wrapper.drawCustomSelection = function (chain, start, end, repr_params, component) {
